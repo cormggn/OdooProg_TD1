@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="students_student_view_form">
+        <field name="name">students.form</field>
+        <field name="model">students.student</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Student">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="number"/>
+                            <field name="training_id" />
+                        </group>
+                        <group>
+                            <field name="firstname"/>
+                            <field name="lastname"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="students_student_view_tree">
+        <field name="name">students.tree</field>
+        <field name="model">students.student</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Students">
+                <field name="firstname"/>
+                <field name="lastname"/>
+                <field name="training_id"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_students_student_view">
+        <field name="name">Students</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">students.student</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="students_training_view_form">
+        <field name="name">trainings.form</field>
+        <field name="model">students.training</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Training">
+                <sheet>
+                    <group string="Information">
+                        <field name="code"/>
+                        <field name="name"/>
+                    </group>
+                    <notebook>
+                        <page string="Students" name="student">
+                            <field name="student_ids">
+                                <tree editable="bottom">
+                                    <field name="number"/>
+                                    <field name="firstname"/>
+                                    <field name="lastname"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="students_training_view_tree">
+        <field name="name">trainings.tree</field>
+        <field name="model">students.training</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Training">
+                <field name="code"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_students_training_view">
+        <field name="name">Trainings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">students.training</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="students_menu" name="Students"/>
+    <menuitem id="students_training_menu" name="Trainings" parent="students_menu" action="action_students_training_view"/>
+    <menuitem id="students_student_menu" name="Students" parent="students_menu" action="action_students_student_view"/>
+</odoo>
